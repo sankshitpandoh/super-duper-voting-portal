@@ -1,0 +1,19 @@
+{
+  "name": "super-duper-voting-portal",
+  "version": "1.0.0",
+  "description": "An online voting schema made in React and Node",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sankshitpandoh/super-duper-voting-portal.git"
+  },
+  "author": "Sankshit Pandoh",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/sankshitpandoh/super-duper-voting-portal/issues"
+  },
+  "homepage": "https://github.com/sankshitpandoh/super-duper-voting-portal#readme"
+}
