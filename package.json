@@ -4,6 +4,9 @@
   "description": "An online voting schema made in React and Node",
   "main": "index.js",
   "scripts": {
+    "start": "node index.js",
+    "dev": "concurrently \"npm run start\" \"cd client && npm run start\"",
+    "postinstall": "cd client && npm install",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -15,5 +18,10 @@
   "bugs": {
     "url": "https://github.com/sankshitpandoh/super-duper-voting-portal/issues"
   },
-  "homepage": "https://github.com/sankshitpandoh/super-duper-voting-portal#readme"
+  "homepage": "https://github.com/sankshitpandoh/super-duper-voting-portal#readme",
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "concurrently": "^5.2.0",
+    "express": "^4.17.1"
+  }
 }
