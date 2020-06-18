@@ -1,4 +1,5 @@
 import React from 'react';
+import './stylesheets/LogIn.css';
 
 class LogIn extends React.Component{
     state = {
@@ -22,7 +23,13 @@ class LogIn extends React.Component{
         e.preventDefault();
         this.state.username.trim() !== "" ?
             this.state.password.trim() !== "" ?
-             this.props.checkCredentials(this.state.username, this.state.password)
+             (() => {
+                this.props.checkCredentials(this.state.username, this.state.password);
+                this.setState({
+                    username: "",
+                    password: ""
+                })
+             })()
              :
              console.log("password field empty")
              :
@@ -33,6 +40,11 @@ class LogIn extends React.Component{
     render(){
         return(
             <div className="log-in">
+                {this.props.error &&
+                <div className="log-in-error d-flex p-1 justify-content-center">
+                    Invalid Login Credentials
+                </div>
+                }
                 <div className="container">
                     <h2 className="text-center py-3 mb-5">Admin Login Portal</h2>
 

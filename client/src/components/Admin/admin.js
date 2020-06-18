@@ -5,7 +5,8 @@ import AdminHome from './adminHome.js';
 
 class Admin extends React.Component{
     state={
-        adminHome: false
+        adminHome: false,
+        error: false
     }
 
     checkCredentials = async(username, password) => {
@@ -17,8 +18,17 @@ class Admin extends React.Component{
         };
         const response = await fetch('/adminLogin', requestOptions);
         let serverResponse = await response.json();
+        // serverResponse.adminPrivilege ?
         this.setState({
-            adminHome: serverResponse.adminPrivilege
+            adminHome: serverResponse.adminPrivilege,
+            error: !serverResponse.adminPrivilege
+        }, () => {
+            /* removing the error message after 3 seconds */
+            setTimeout( function(){
+                this.setState({
+                    error: false,
+                })
+            }.bind(this), 3000)
         })
     }
     
@@ -28,7 +38,7 @@ class Admin extends React.Component{
                 {this.state.adminHome ?
                 <AdminHome />
                 :
-                <LogIn checkCredentials={this.checkCredentials} />
+                <LogIn error = {this.state.error} checkCredentials={this.checkCredentials} />
                 }
             </>
         )
