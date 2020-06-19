@@ -15,6 +15,18 @@ class MainHome extends React.Component{
             activeOption: index
         })
     }
+
+    submitPost = async(title, description, options) =>{
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ title: title, description: description, options: options })
+        };
+        const response = await fetch('/addPost', requestOptions);
+        let serverResponse = await response.json();
+        console.log(serverResponse)
+    }
+
     render(){
         return(
             <div className="main-home d-flex">
@@ -23,7 +35,7 @@ class MainHome extends React.Component{
                     (() => {
                     switch(this.state.activeOption){
                         case 1 :
-                            return <HomeAddPosts />
+                            return <HomeAddPosts submitPost = {this.submitPost} />
                         case 2 : 
                             return <HomeSettings />
                         default :

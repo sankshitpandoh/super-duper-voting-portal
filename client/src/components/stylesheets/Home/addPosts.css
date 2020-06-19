@@ -2,6 +2,16 @@
     width: 85%;
     background-color: #51E5FF;
 }
+.add-posts-container .post-error-message{
+    position: fixed;
+    background-color: red;
+    color: #fff;
+    font-family: 'Montserrat-Regular';
+    z-index: 10;
+}
+.add-posts-container .half-post-container .submit-post{
+    background-color: black;
+}
 .add-posts-container .half-post-container span{
     font-family: 'Montserrat-Bold';
     color: #000;
