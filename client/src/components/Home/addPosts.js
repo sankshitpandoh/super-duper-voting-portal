@@ -47,6 +47,11 @@ class HomeAddPosts extends React.Component{
         })
     }
 
+    handleKeyDown = (e) => {
+        e.key === 'Enter' &&
+        this.addOption();
+    }
+
     handlePost = (e) => {
         this.state.postTitle.trim() !== "" ?
             this.state.options.length > 1 ?
@@ -124,7 +129,7 @@ class HomeAddPosts extends React.Component{
                             <textarea className = "mb-4" value={this.state.postDescription} onChange={this.handlePostDescription}></textarea>
                             <span className="mb-2">Options: *</span>
                             <span className="w-100">
-                                <input className = "mb-4 single-option w-75" type="text" value={this.state.singleOption} onChange={this.handleSingleOption} />
+                                <input className = "mb-4 single-option w-75" onKeyDown={this.handleKeyDown} type="text" value={this.state.singleOption} onChange={this.handleSingleOption} />
                                 <button className="ml-2 p-1" onClick={this.addOption}>Add Option</button>
                             </span>
                             <input className="submit-post p-2" type="submit" value="Sumbit Post" onClick={this.handlePost}/>

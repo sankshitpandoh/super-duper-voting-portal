@@ -36,13 +36,14 @@
     border: 0;
     background-color: transparent;
     border-bottom: 2px solid #000;
-    color: #440381;
+    color: #000;
     font-family: 'Montserrat-Light';
 }
 .add-posts-container .half-post-container textarea{
     background-color: white;
     border: 0;
     height: 200px;
+    font-family: 'Montserrat-Light';
 }
 .add-posts-container .half-post-container span button{
     font-family: 'OpenSans';
