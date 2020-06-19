@@ -1,10 +1,13 @@
 import React from 'react';
 import '../stylesheets/Home/homeLeftPanel.css';
 
-const navContents = ['Overview', 'Add Posts', 'Settings', 'LogOut']
-
+let navContents;
 class HomeLeftPanel extends React.Component{
     render(){
+        this.props.adminPrivilege ?
+        navContents = ['Overview', 'Add Posts', 'Settings', 'LogOut']
+        :
+        navContents = ['Overview', 'Settings', 'LogOut']
         const items = navContents.map((x, index) => {
             return this.props.activeOption === index ?
                 <li key={index} className="d-flex justify-content-center px-2 mb-3 active">{x}</li>

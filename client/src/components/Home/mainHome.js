@@ -18,8 +18,9 @@ class MainHome extends React.Component{
     render(){
         return(
             <div className="main-home d-flex">
-                <HomeLeftPanel activeOption={this.state.activeOption} makeActive={this.openOption} logOut = {this.props.logOut} />
-                {(() => {
+                <HomeLeftPanel adminPrivilege={this.props.adminPrivilege} activeOption={this.state.activeOption} makeActive={this.openOption} logOut = {this.props.logOut} />
+                { this.props.adminPrivilege ? 
+                    (() => {
                     switch(this.state.activeOption){
                         case 1 :
                             return <HomeAddPosts />
@@ -28,7 +29,17 @@ class MainHome extends React.Component{
                         default :
                             return <HomeOverview />
                     }
-                })()}
+                })()
+                :
+                (() => {
+                    switch(this.state.activeOption){
+                        case 1 :
+                            return <HomeSettings />
+                        default :
+                            return <HomeOverview />
+                    }
+                })()
+                }
             </div>
         )
     }

@@ -3,14 +3,30 @@ import { Redirect } from 'react-router-dom';
 import MainHome from './mainHome.js'
 class Home extends React.Component{
     state={
-        userExists : true
+        userExists : true,
+        adminPrivilege: false
     }
 
     componentDidMount(){
-        localStorage.getItem('userId') === null &&
+        localStorage.getItem('userId') === null ?
         this.setState({
             userExists: false
         })
+        :
+        (async() => {
+            let userId =  localStorage.getItem('userId');
+            const requestOptions = {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ userId: userId })
+            };
+            const response = await fetch('/getUserDetails', requestOptions);
+            let serverResponse = await response.json();
+            let adminPrivilege = serverResponse.adminPrivilege;
+            this.setState({
+                adminPrivilege: adminPrivilege
+            })
+        })();
     }
 
     logOut = () =>{
@@ -26,7 +42,7 @@ class Home extends React.Component{
             <>
             {
                 this.state.userExists ?
-                <MainHome logOut = {this.logOut}/>
+                <MainHome adminPrivilege={this.state.adminPrivilege} logOut = {this.logOut}/>
                 :
                 <Redirect to ="/" />
             }

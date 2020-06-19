@@ -27,3 +27,18 @@ app.post('/logInUser' , (req, res) => {
         res.send({adminPrivilege: adminPrivilege, userExist : userExist, userId: userId });
     });
 });
+
+app.post('/getUserDetails', (req, res) => {
+    let adminPrivilege;
+    fs.readFile("./data/usersData.json" , (err, data) => {
+        let dataArray = JSON.parse(data);
+        for(let i = 0; i < dataArray.length; i++){
+            if(dataArray[i].userId === req.body.userId){
+                adminPrivilege = dataArray[i].adminPrivilege;
+                console.log(adminPrivilege)
+                break;
+            }
+        }
+        res.send({adminPrivilege: adminPrivilege})
+    })
+})

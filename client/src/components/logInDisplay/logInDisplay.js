@@ -4,7 +4,7 @@ import { Redirect } from 'react-router-dom';
 
 class LogInDisplay extends React.Component{
     state={
-        adminPrivilige: false,
+        // adminPrivilege: false,
         error: false,
         userLoggedIn: false,
         userId: ""
@@ -24,7 +24,7 @@ class LogInDisplay extends React.Component{
         const response = await fetch('/logInUser', requestOptions);
         let serverResponse = await response.json();
         this.setState({
-            adminPrivilige: serverResponse.adminPrivilege,
+            // adminPrivilege: serverResponse.adminPrivilege,
             userLoggedIn: serverResponse.userExist,
             error: !serverResponse.userExist,
             userId: serverResponse.userId
