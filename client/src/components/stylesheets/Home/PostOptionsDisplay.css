@@ -1,0 +1,30 @@
+.single-option-display{
+    background-color: #ec368d;
+}
+.single-option-display div{
+    overflow: auto;
+    width: 82%;
+    scrollbar-width: none;
+    font-family: 'Montserrat-Light';
+    text-transform: capitalize;
+    color: #000;
+}   
+.single-option-display button{
+    width: 15%;
+    font-size: 12px;
+    font-family: 'OpenSans';
+    background-color: #fff;
+    color: #000;
+    border: 0;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+.single-option-display button:hover{
+    background-color: #000;
+    color: #fff;
+}
+.post-options-container h3{
+    font-size: 20px;
+    font-family: 'Montserrat-Bold';
+    color: #000;
+}

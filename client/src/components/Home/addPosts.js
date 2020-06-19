@@ -1,11 +1,17 @@
 import React from 'react';
-import '../stylesheets/Home/addPosts.css'
+import '../stylesheets/Home/addPosts.css';
+import PostOptionsDisplay from'./PostOptionsDisplay.js';
 
 class HomeAddPosts extends React.Component{
     state={
         postTitle: "",
         postDescription: "",
-        options: []
+        singleOption: "",
+        options: [],
+        error: false,
+        errorMessage: "",
+        responseMessage: "",
+        responseStatus: false
     }
 
     handlePostTitle = (e) => {
@@ -22,37 +28,114 @@ class HomeAddPosts extends React.Component{
         })
     }
 
+    handleSingleOption = (e) => {
+        let singleOption = e.target.value
+        singleOption.trim() !== "" &&
+        singleOption.length !== 0 &&
+        this.setState({
+            singleOption: singleOption
+        })
+    }
+
+    /* To do fix add option */
+    addOption = () => {
+        this.setState({
+            options: [...this.state.options, this.state.singleOption ],
+            singleOption: ""
+        })
+    }
+
+    handleKeyDown = (e) => {
+        e.key === 'Enter' &&
+        this.addOption();
+    }
+
     handlePost = (e) => {
-        e.preventDefault();
-        this.state.postTitle.trim() !== "" &&
-            this.state.options.length > 1 &&
-            this.props.submitPost(this.state.postTitle, this.postDescription, this.state.options);
+        this.state.postTitle.trim() !== "" ?
+            this.state.options.length > 1 ?
+            (() => {
+               let x =  this.props.submitPost(this.state.postTitle, this.state.postDescription, this.state.options);
+               x&&
+               this.setState({
+                   responseMessage: "Post Added Successfully",
+                   responseStatus: true,
+                   postTitle: "",
+                   postDescription: "",
+                   singleOption: "",
+                   options: []
+               },() => {
+                setTimeout( function(){
+                    this.setState({
+                        responseMessage: "",
+                        responseStatus: false
+                    })
+                }.bind(this), 3000)
+            })
+            })()
+            :
+            this.setState({
+                errorMessage: "Minimum Two options should be Provided",
+                error: true
+            },() => {
+                setTimeout( function(){
+                    this.setState({
+                        error: false,
+                        errorMessage: ""
+                    })
+                }.bind(this), 3000)
+            })
+            :
+            this.setState({
+                errorMessage: "Post Title Cannot be Empty",
+                error: true
+            },() => {
+                setTimeout( function(){
+                    this.setState({
+                        error: false,
+                        errorMessage: ""
+                    })
+                }.bind(this), 3000)
+            })
+    }
+
+    deleteOption = (index) => {
+        this.state.options.splice(index, 1);
+        this.setState({
+            options: this.state.options
+        })
     }
 
     render(){
         return(
-            <div className="add-posts-container">
-                <form className="d-flex" onSubmit={this.handlePost}>
+            <div className="add-posts-container d-flex">
+                {this.state.error &&
+                    <div className="post-error-message d-flex justify-content-center p-1 w-100">
+                        {this.state.errorMessage}
+                    </div>
+                }
+                {
+                    this.state.responseStatus &&
+                    <div className="post-response-message d-flex justify-content-center p-1 w-100">
+                        {this.state.responseMessage}
+                    </div>
+                }
                     <div className="col-6">
                         <div className="half-post-container d-flex flex-column p-2">
                             <span className="mb-2">Post Title: *</span>
-                            <input className = "mb-4" type="text" onChange={this.handlePostTitle} required />
+                            <input className = "mb-4" type="text" value={this.state.postTitle} onChange={this.handlePostTitle} required />
                             <span className="mb-2">Post Description:</span>
-                            <textarea className = "mb-4" onChange={this.handlePostDescription}></textarea>
+                            <textarea className = "mb-4" value={this.state.postDescription} onChange={this.handlePostDescription}></textarea>
                             <span className="mb-2">Options: *</span>
                             <span className="w-100">
-                                <input className = "mb-4 single-option w-75" type="text" />
-                                <button className="ml-2 p-1">Add Option</button>
+                                <input className = "mb-4 single-option w-75" onKeyDown={this.handleKeyDown} type="text" value={this.state.singleOption} onChange={this.handleSingleOption} />
+                                <button className="ml-2 p-1" onClick={this.addOption}>Add Option</button>
                             </span>
+                            <input className="submit-post p-2" type="submit" value="Sumbit Post" onClick={this.handlePost}/>
                         </div>
                     </div>
                     <div className="col-6">
-                        <div className="half-post-container d-flex flex-column p-2">
-                            <span>Options Display:</span>
-                            <div className="d-flex flex-column" id="options-display"></div>   
-                        </div>
+                        <PostOptionsDisplay options = {this.state.options} deleteOption= {this.deleteOption} />
                     </div>
-                </form>
             </div>
         )
     }
