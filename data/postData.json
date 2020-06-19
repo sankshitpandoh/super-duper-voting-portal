@@ -1,0 +1,9 @@
+[{
+    "postTitle" : "Post Title Comes Here",
+    "postDescription" : "Post Description Comes here",
+    "postOptions" : [
+        {"optionValue" : "value1" , "votes" : []},
+        {"optionValue" : "value2" , "votes" : []}
+    ],
+    "timeStamp" : "time of post creation"
+}]

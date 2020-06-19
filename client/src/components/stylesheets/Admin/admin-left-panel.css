@@ -1,6 +1,7 @@
 .admin-left-panel{
     background-color: #440381;
     color: #EC368D;
+    width: 15%;
 }
 .admin-left-panel ul li{
     cursor: pointer;

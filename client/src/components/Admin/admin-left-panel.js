@@ -15,7 +15,7 @@ class AdminLeftPanel extends React.Component{
                 <li key={index} onClick={() => {this.props.makeActive(index)}} className="d-flex justify-content-center px-2 mb-3">{x}</li>
         })
         return(
-            <div className="d-flex flex-column w-25 admin-left-panel">
+            <div className="d-flex flex-column admin-left-panel">
                 <ul className="py-2">
                     {items}
                 </ul>
