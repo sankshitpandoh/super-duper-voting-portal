@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/Home/admin-left-panel.css';
+import '../stylesheets/Home/homeLeftPanel.css';
 
 const navContents = ['Overview', 'Add Posts', 'Settings', 'LogOut']
 
@@ -15,7 +15,7 @@ class HomeLeftPanel extends React.Component{
                 <li key={index} onClick={() => {this.props.makeActive(index)}} className="d-flex justify-content-center px-2 mb-3">{x}</li>
         })
         return(
-            <div className="d-flex flex-column admin-left-panel">
+            <div className="d-flex flex-column home-left-panel">
                 <ul className="py-2">
                     {items}
                 </ul>

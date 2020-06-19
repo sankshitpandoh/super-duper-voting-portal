@@ -1,5 +1,5 @@
 import React from 'react';
-import '../stylesheets/Home/adminHome.css';
+import '../stylesheets/Home/mainHome.css';
 import HomeLeftPanel from './homeLeftPanel';
 import HomeAddPosts from './addPosts.js';
 import HomeSettings from './homeSettings.js';
@@ -17,7 +17,7 @@ class MainHome extends React.Component{
     }
     render(){
         return(
-            <div className="admin-home d-flex">
+            <div className="main-home d-flex">
                 <HomeLeftPanel activeOption={this.state.activeOption} makeActive={this.openOption} logOut = {this.props.logOut} />
                 {(() => {
                     switch(this.state.activeOption){
