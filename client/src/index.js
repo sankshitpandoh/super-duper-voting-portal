@@ -6,6 +6,7 @@ import Admin from './components/Admin/admin.js';
 import LogInDisplay from './components/logInDisplay/logInDisplay.js';
 import './components/stylesheets/general/bootstrap.min.css';
 import './components/stylesheets/general/reset.css';
+import './components/stylesheets/general/font-face.css';
 
 class App extends React.Component{
     render(){

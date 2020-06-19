@@ -8,6 +8,7 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
+/* api responsible for logging in the admin  */
 app.post('/adminLogin' , (req, res) => {
     console.log(req.body)
     let adminPrivilege = false;

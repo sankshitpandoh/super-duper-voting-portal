@@ -18,7 +18,6 @@ class Admin extends React.Component{
         };
         const response = await fetch('/adminLogin', requestOptions);
         let serverResponse = await response.json();
-        // serverResponse.adminPrivilege ?
         this.setState({
             adminHome: serverResponse.adminPrivilege,
             error: !serverResponse.adminPrivilege
@@ -31,12 +30,18 @@ class Admin extends React.Component{
             }.bind(this), 3000)
         })
     }
+
+    logAdminOut = () =>{
+        this.setState({
+            adminHome: false
+        })
+    }
     
     render(){
         return(
             <>
                 {this.state.adminHome ?
-                <AdminHome />
+                <AdminHome logAdminOut={this.logAdminOut} />
                 :
                 <LogIn error = {this.state.error} checkCredentials={this.checkCredentials} />
                 }
