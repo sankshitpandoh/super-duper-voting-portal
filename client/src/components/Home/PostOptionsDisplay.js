@@ -24,4 +24,4 @@ class PostOptionsDisplay extends React.Component{
     }
 }
 
-export default PostOptionsDisplay
+export default PostOptionsDisplay;

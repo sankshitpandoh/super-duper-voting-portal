@@ -34,8 +34,6 @@ class HomeAddPosts extends React.Component{
         singleOption.length !== 0 &&
         this.setState({
             singleOption: singleOption
-        }, () => {
-            console.log(singleOption)
         })
     }
 

@@ -48,11 +48,15 @@
 .add-posts-container .half-post-container span button{
     font-family: 'OpenSans';
     background-color: #000;
+    border: 1px solid #000;
     border: 0;
     color: #fff;
     cursor: pointer;
     width: 22%;
+    transition: 0.5s all;
 }
-/* .add-posts-container .col-6:nth-child(2){
-    background-color: #51E5FF;    
-} */
+.add-posts-container .half-post-container span button:hover{
+    background-color: #fff;
+    color: #000;
+}
+

@@ -1,6 +1,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const fs = require('fs')
+const crypto = require('crypto');
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -8,16 +9,16 @@ const port = process.env.PORT || 4000;
 app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
-/* api responsible for logging in the admin  */
+/* api responsible for logging in the user  */
 app.post('/logInUser' , (req, res) => {
-    console.log(req.body)
     let userExist = false;
     let adminPrivilege = false;
     let userId;
     fs.readFile("./data/usersData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
+        let hashPwd = crypto.createHash('sha1').update(req.body.password).digest('hex');
         for(let i = 0; i < dataArray.length; i++){
-            if(dataArray[i].username === req.body.username && dataArray[i].password === req.body.password){
+            if(dataArray[i].username === req.body.username && dataArray[i].password === hashPwd){
                 userExist = true;
                 adminPrivilege = dataArray[i].adminPrivilege;
                 userId = dataArray[i].userId;
@@ -54,7 +55,7 @@ app.post('/addPost', (req, res) => {
             optionArray.push(singleOption)
         }
         let newPostObject = {
-            postId : makeId(),
+            postId : makePostId(),
             postTitle : req.body.title,
             postDescription : req.body.description,
             postOptions : optionArray,
@@ -70,12 +71,24 @@ app.post('/addPost', (req, res) => {
 });
 
 /* Generates unique id for a new Post */
-function makeId(){
+function makePostId(){
     let result = '';
     let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     let charactersLength = characters.length;
-    for(let i = 0; i < 10; i++){
+    for(let i = 0; i < 6; i++){
         result += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
     return result;
 }
+
+/* Generates unique id for a new user */
+function makeUserId(){
+    let result = '';
+    let characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    let charactersLength = characters.length;
+    for(let i = 0; i < 12; i++){
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+
