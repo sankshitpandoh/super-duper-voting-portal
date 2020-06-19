@@ -7,7 +7,8 @@ import HomeOverview from './homeOverview.js';
 
 class MainHome extends React.Component{
     state={
-        activeOption: 0
+        activeOption: 0,
+        postSubmissionResponse: ""
     }
 
     openOption = (index) => {
@@ -25,6 +26,7 @@ class MainHome extends React.Component{
         const response = await fetch('/addPost', requestOptions);
         let serverResponse = await response.json();
         console.log(serverResponse)
+        return serverResponse
     }
 
     render(){
