@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AdminAddPosts extends React.Component{
+class HomeAddPosts extends React.Component{
     render(){
         return(
             <>
@@ -10,4 +10,4 @@ class AdminAddPosts extends React.Component{
     }
 }
 
-export default AdminAddPosts;
+export default HomeAddPosts;

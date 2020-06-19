@@ -1,5 +1,5 @@
 import React from 'react';
-import LogIn from '../logIn.js';
+import LogIn from './logIn.js';
 import { Redirect } from 'react-router-dom';
 
 class LogInDisplay extends React.Component{
@@ -41,16 +41,13 @@ class LogInDisplay extends React.Component{
         })
     }
 
-    logAdminOut = () =>{
-        this.setState({
-            adminHome: false
-        })
-    }
     render(){
         return(
             <>
                 {this.state.userLoggedIn ? 
-                <Redirect to="/home" />
+                <Redirect to={{
+                        pathname : "/home"
+                        }} />
                 :
                 <LogIn error = {this.state.error} checkCredentials={this.checkCredentials} />
                 }

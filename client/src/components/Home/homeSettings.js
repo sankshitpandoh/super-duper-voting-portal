@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AdminSettings extends React.Component{
+class HomeSettings extends React.Component{
     render(){
         return(
             <h1>Settings</h1>
@@ -8,4 +8,4 @@ class AdminSettings extends React.Component{
     }
 }
 
-export default AdminSettings;
+export default HomeSettings;

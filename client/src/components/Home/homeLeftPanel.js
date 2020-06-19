@@ -1,16 +1,16 @@
 import React from 'react';
-import '../stylesheets/Admin/admin-left-panel.css';
+import '../stylesheets/Home/admin-left-panel.css';
 
 const navContents = ['Overview', 'Add Posts', 'Settings', 'LogOut']
 
-class AdminLeftPanel extends React.Component{
+class HomeLeftPanel extends React.Component{
     render(){
         const items = navContents.map((x, index) => {
             return this.props.activeOption === index ?
                 <li key={index} className="d-flex justify-content-center px-2 mb-3 active">{x}</li>
                 :
                 x === "LogOut" ?
-                <li key={index} onClick={this.props.logAdminOut} className="d-flex justify-content-center px-2 mb-3">{x}</li>
+                <li key={index} onClick={this.props.logOut} className="d-flex justify-content-center px-2 mb-3">{x}</li>
                 :
                 <li key={index} onClick={() => {this.props.makeActive(index)}} className="d-flex justify-content-center px-2 mb-3">{x}</li>
         })
@@ -24,4 +24,4 @@ class AdminLeftPanel extends React.Component{
     }
 }
 
-export default AdminLeftPanel;
+export default HomeLeftPanel;

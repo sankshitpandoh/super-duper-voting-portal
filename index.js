@@ -21,7 +21,6 @@ app.post('/logInUser' , (req, res) => {
                 userExist = true;
                 adminPrivilege = dataArray[i].adminPrivilege;
                 userId = dataArray[i].userId;
-                console.log(dataArray[i])
                 break;
             }
         }
