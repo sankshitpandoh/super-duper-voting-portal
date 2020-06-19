@@ -1,0 +1,30 @@
+.add-posts-container{
+    width: 85%;
+    background-color: #51E5FF;
+}
+.add-posts-container .half-post-container span{
+    font-family: 'Montserrat-Bold';
+    color: #000;
+}
+.add-posts-container .half-post-container input{
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #000;
+    color: #440381;
+    font-family: 'Montserrat-Light';
+}
+.add-posts-container .half-post-container textarea{
+    background-color: white;
+    border: 0;
+    height: 200px;
+}
+.add-posts-container .half-post-container span button{
+    font-family: 'OpenSans';
+    background-color: #000;
+    border: 0;
+    color: #fff;
+    cursor: pointer;
+}
+/* .add-posts-container .col-6:nth-child(2){
+    background-color: #51E5FF;    
+} */

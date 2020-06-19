@@ -1,6 +1,6 @@
 import React from 'react';
 
-class AdminOverview extends React.Component{
+class HomeOverview extends React.Component{
     render(){
         return(
             <h1>Overview</h1>
@@ -8,4 +8,4 @@ class AdminOverview extends React.Component{
     }
 }
 
-export default AdminOverview;
+export default HomeOverview;

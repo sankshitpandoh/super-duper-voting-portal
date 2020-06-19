@@ -1,5 +1,5 @@
 import React from 'react';
-import './stylesheets/LogIn.css';
+import '../stylesheets/LogIn.css';
 
 class LogIn extends React.Component{
     state = {
@@ -46,7 +46,7 @@ class LogIn extends React.Component{
                 </div>
                 }
                 <div className="container">
-                    <h2 className="text-center py-3 mb-5">Admin Login Portal</h2>
+                    <h2 className="text-center py-3 mb-5">Login Portal</h2>
 
                     <form className="d-flex flex-column align-items-center w-50 mx-auto" onSubmit={this.handleSubmit}>
                         <span className="d-flex flex-column w-100 mb-4">

@@ -1,18 +1,18 @@
-.admin-left-panel{
+.home-left-panel{
     background-color: #440381;
     color: #EC368D;
     width: 15%;
 }
-.admin-left-panel ul li{
+.home-left-panel ul li{
     cursor: pointer;
     font-family: 'Montserrat-Regular';
     transition: 0.5s all;
     font-size: 18px;
 }
-.admin-left-panel ul li:hover{
+.home-left-panel ul li:hover{
     color: #ffebeb;
 }
-.admin-left-panel ul .active{
+.home-left-panel ul .active{
     color: #fff;
     text-decoration: underline;
     transition: 0.5s all;
