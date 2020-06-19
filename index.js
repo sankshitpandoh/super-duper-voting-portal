@@ -9,17 +9,22 @@ app.use(bodyParser.json({limit: '10mb', extended: true}));
 app.listen(port, () => console.log(`Listening on port ${port}`));
 
 /* api responsible for logging in the admin  */
-app.post('/adminLogin' , (req, res) => {
+app.post('/logInUser' , (req, res) => {
     console.log(req.body)
+    let userExist = false;
     let adminPrivilege = false;
-    fs.readFile("./data/adminData.json" , (err, data) => {
+    let userId;
+    fs.readFile("./data/usersData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         for(let i = 0; i < dataArray.length; i++){
             if(dataArray[i].username === req.body.username && dataArray[i].password === req.body.password){
-                adminPrivilege = true;
+                userExist = true;
+                adminPrivilege = dataArray[i].adminPrivilege;
+                userId = dataArray[i].userId;
+                console.log(dataArray[i])
                 break;
             }
         }
-        res.send({adminPrivilege: adminPrivilege});
+        res.send({adminPrivilege: adminPrivilege, userExist : userExist, userId: userId });
     });
 });
