@@ -8,7 +8,8 @@ class HomeOverview extends React.Component{
     // }
     state={
         pageNo: 1,
-        postData: []
+        postData: [],
+        moreNext: false
     }
 
     componentDidMount(){
@@ -32,7 +33,8 @@ class HomeOverview extends React.Component{
         const response = await fetch('/getPosts', requestOptions);
         let serverResponse = await response.json();
         this.setState({
-            postData: serverResponse.responsePostObject
+            postData: serverResponse.responsePostObject,
+            moreNext: serverResponse.moreNext
         })
     }
 
@@ -40,7 +42,7 @@ class HomeOverview extends React.Component{
         this.setState({
             pageNo: this.state.pageNo - 1
         }, () => {
-            this.getPostData()
+            this.getPostData();
         })
     }
 
@@ -48,7 +50,7 @@ class HomeOverview extends React.Component{
         this.setState({
             pageNo: this.state.pageNo + 1
         }, () => {
-            this.getPostData()
+            this.getPostData();
         })
     }
 
@@ -62,9 +64,9 @@ class HomeOverview extends React.Component{
                     <div className="row">
                         {items}
                     </div>
-                    <div className="pagination-buttons-container">
+                    <div className="pagination-buttons-container pb-2">
                         <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
-                        <button onClick={this.nextPage}>Next</button>
+                        <button disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
                     </div>
                 </div>
             </div>
