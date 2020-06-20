@@ -1,5 +1,6 @@
 import React from 'react';
 import LogIn from './logIn.js';
+import SignUp from './signUp.js';
 import { Redirect } from 'react-router-dom';
 
 class LogInDisplay extends React.Component{
@@ -7,12 +8,9 @@ class LogInDisplay extends React.Component{
         // adminPrivilege: false,
         error: false,
         userLoggedIn: false,
-        userId: ""
+        userId: "",
+        logInPage: true
     }
-
-    // componentDidMount({
-        
-    // })
 
     checkCredentials = async(username, password) => {
         /* making a POST request to server to check if admin credentials are correct */
@@ -41,6 +39,12 @@ class LogInDisplay extends React.Component{
         })
     }
 
+    switchingLogin = () => {
+        this.setState({
+            logInPage: !this.state.logInPage
+        })
+    }
+
     render(){
         return(
             <>
@@ -49,7 +53,10 @@ class LogInDisplay extends React.Component{
                         pathname : "/home"
                         }} />
                 :
-                <LogIn error = {this.state.error} checkCredentials={this.checkCredentials} />
+                this.state.logInPage ?
+                <LogIn switchingLogin = {this.switchingLogin} error = {this.state.error} checkCredentials={this.checkCredentials} />
+                :
+                <SignUp switchingLogin = {this.switchingLogin} />
                 }
             </>
         )

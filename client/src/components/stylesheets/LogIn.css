@@ -1,3 +1,6 @@
+.log-in{
+    height: 100vh;
+}
 .log-in .log-in-error{
     position: fixed;
     top: 0;
@@ -5,4 +8,23 @@
     right: 0;
     background-color: rgba(255,0,0,0.8);
     color: #fff;
+}
+.log-in form h2{   
+    font-family: 'Montserrat-Bold';
+}
+.log-in form span{
+    font-family: 'Montserrat-Regular';
+}
+.log-in form span input{
+    font-family: 'Montserrat-Light';
+}
+.log-in .sign-up-message{
+    font-family: 'Montserrat-Light';
+}
+.log-in .sign-up-message strong{
+    cursor: pointer;
+    transition: 0.25s all;
+}
+.log-in .sign-up-message strong:hover{
+    text-decoration: underline;
 }
