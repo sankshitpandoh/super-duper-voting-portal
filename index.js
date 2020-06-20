@@ -86,7 +86,7 @@ app.post('/getPosts', (req, res) => {
         let responsePostObject = [];
         if(dataArray.length / 10 >= req.body.postBatch){
             postBatch = req.body.postBatch * 10;
-            for(let i = postBatch - 9; i < postBatch; i++){
+            for(let i = postBatch - 9; i <= postBatch; i++){
                 let optionArray = [];
                 if(req.body.adminPrivilege === false){
                     for(let j = 0; j < dataArray[i].postOptions.length; j++){
@@ -152,7 +152,6 @@ app.post('/getPosts', (req, res) => {
                 lastPost = i
             }
         }
-        console.log(lastPost + " " + dataArray.length)
         if(lastPost + 1 < dataArray.length){
             res.send({responsePostObject: responsePostObject, moreNext: true  })
         }   
