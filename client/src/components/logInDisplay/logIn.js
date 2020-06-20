@@ -39,16 +39,20 @@ class LogIn extends React.Component{
 
     render(){
         return(
-            <div className="log-in">
+            <div className="log-in d-flex align-items-center">
                 {this.props.error &&
                 <div className="log-in-error d-flex p-1 justify-content-center">
                     Invalid Login Credentials
                 </div>
                 }
+                {this.props.hoverMenu &&
+                    <div className="message-container d-flex justify-content-center p-1">
+                            <p>Account sucessfully created, log in with your credentials</p>
+                    </div>
+                }
                 <div className="container">
-                    <h2 className="text-center py-3 mb-5">Login Portal</h2>
-
                     <form className="d-flex flex-column align-items-center w-50 mx-auto" onSubmit={this.handleSubmit}>
+                        <h2 className="mr-auto mb-3">Login Portal</h2>
                         <span className="d-flex flex-column w-100 mb-4">
                             Username:
                             <input className="p-1" type="text" placeholder="User Name here" value={this.state.username} onChange={this.handleUserName} />
@@ -57,7 +61,8 @@ class LogIn extends React.Component{
                             Password:
                             <input className="p-1" type="password" placeholder="Password here" value={this.state.password} onChange={this.handlePassword} />
                         </span>
-                        <input className="ml-auto" type="submit" value="Log In" />
+                        <input className="ml-auto mb-2" type="submit" value="Log In" />
+                        <span className="sign-up-message">Don't have an account? <strong onClick={this.props.switchingLogin}>Click here </strong> to SignUp</span>
                     </form>
 
                 </div>

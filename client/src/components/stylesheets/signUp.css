@@ -1,0 +1,70 @@
+.sign-up{
+    height: 100vh;
+}
+.sign-up-container{
+    margin: 0 auto;
+    background-color: #FF5D73;
+    border-radius: 10px;
+}
+.sign-up-container h1{
+    font-family: 'Montserrat-Bold';
+    margin-bottom: 15px;
+}
+.sign-up-container span{
+    color: #494949;
+    font-family: 'Montserrat-Regular';
+    position: relative;
+}
+.sign-up-container span p{
+    position: absolute;
+    left: 80%;
+    background-color: red;
+    padding: 3px;
+    bottom: 2px;
+    border-radius: 5px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    color: #fff;
+    font-family: 'Montserrat-Regular';
+}
+.sign-up-container span input{
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #FFF; 
+    font-family: 'Montserrat-Regular';
+    font-weight: 300;
+}
+.sign-up-container span input::placeholder{
+    opacity: 0.35;
+    color: #FFF;
+}
+.sign-up-container button{
+    border: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s all;
+    border: 1px solid #FFF;
+    font-family: 'Montserrat-Regular';
+}
+.sign-up-container button:hover{
+    background-color: transparent;
+    color: #FFF;
+}
+.sign-up-container button:disabled{
+    background-color: rgba(255,255,255,0.75);
+    color: #FFF;
+    cursor: default;
+}
+.sign-up-container p{
+    text-align: center;
+    font-size: 14px;
+    font-family: 'Montserrat-Light';
+}
+.sign-up-container p strong{
+    transition: 0.5s all;
+    cursor: pointer;
+}
+.sign-up-container p strong:hover{
+    text-decoration: underline;
+}

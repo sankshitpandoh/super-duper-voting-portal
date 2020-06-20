@@ -29,6 +29,41 @@ app.post('/logInUser' , (req, res) => {
     });
 });
 
+/* API responsible for checking if the username entered has been use before or not */
+app.post('/api/checkUserName' , (req, res) => {
+    fs.readFile('./data/usersData.json' , (err,data) => {
+      let dataArray = JSON.parse(data);
+      let userNameAvailable = true;
+      for(let i = 0; i < dataArray.length; i++){
+        if(dataArray[i].username === req.body.username){
+          userNameAvailable = false;
+          break;
+        }
+      }
+      res.send({userNameAvailable: userNameAvailable})
+    });
+  });
+
+
+/* API responsible for registering / signing up a new user */
+app.post('/api/signUpUser', (req, res) => {
+    let newUser = {
+      username: req.body.username,
+      password: crypto.createHash('sha1').update(req.body.password).digest('hex'),
+      userId : makeUserId(),
+      adminPrivilege: false
+    }
+    fs.readFile('./data/usersData.json', (err, data) => {
+      let dataArray = JSON.parse(data);
+      dataArray.push(newUser);
+      fs.writeFile("./data/usersData.json", JSON.stringify(dataArray), function(err){
+        if (err) throw err;
+        console.log('The user was sucessfully registered ');
+        res.send({userRegistered: true})
+      });
+    });
+  });
+
 app.post('/getUserDetails', (req, res) => {
     let adminPrivilege;
     fs.readFile("./data/usersData.json" , (err, data) => {
