@@ -12,16 +12,12 @@ class HomeOverview extends React.Component{
     }
 
     componentDidMount(){
-        if(this.props.adminPrivilege === false){
             this.getPostData();
-        }
     }
 
     componentDidUpdate(prevProps, prevState){
         if (prevProps.adminPrivilege !== undefined && this.props.adminPrivilege !== prevProps.adminPrivilege){
             this.getPostData();
-            console.log(prevProps)
-            console.log(this.props)
         }
     }
 
@@ -36,10 +32,21 @@ class HomeOverview extends React.Component{
         const response = await fetch('/getPosts', requestOptions);
         let serverResponse = await response.json();
         this.setState({
-            postData: serverResponse
+            postData: serverResponse.responsePostObject
         })
     }
 
+    prevPage = () => {
+        this.setState({
+            pageNo: this.state.pageNo - 1
+        })
+    }
+
+    nextPage = () => {
+        this.setState({
+            pageNo: this.state.pageNo + 1
+        })
+    }
     render(){
         const items = this.state.postData.map((x, index) =>{
             return <SinglePost singlePostData = {x} key={index} />
@@ -49,6 +56,10 @@ class HomeOverview extends React.Component{
                 <div className="container">
                     <div className="row">
                         {items}
+                    </div>
+                    <div className="pagination-buttons-container">
+                        <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
+                        <button onClick={this.nextPage}>Next</button>
                     </div>
                 </div>
             </div>

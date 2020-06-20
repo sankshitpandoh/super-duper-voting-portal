@@ -80,6 +80,7 @@ app.post('/getUserDetails', (req, res) => {
 
 app.post('/getPosts', (req, res) => {
     let postBatch;
+    let lastPost;
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let responsePostObject = [];
@@ -114,6 +115,7 @@ app.post('/getPosts', (req, res) => {
                     "timeStamp" : dataArray[i].timeStamp
                 }
                 responsePostObject.push(singlePostObject);
+                lastPost = i
             }
         }
         else{
@@ -123,7 +125,7 @@ app.post('/getPosts', (req, res) => {
                 if(req.body.adminPrivilege === false){
                     for(let j = 0; j < dataArray[i].postOptions.length; j++){
                         let singleOption = {
-                            optionValue : dataArray[i].postOptions[j].optionValue,
+                            optionValue : dataArray[i].postOptions[j],
                             votes : dataArray[i].postOptions[j].votes.length
                         }
                         optionArray.push(singleOption)
@@ -132,10 +134,11 @@ app.post('/getPosts', (req, res) => {
                 else{
                     for(let j = 0; j < dataArray[i].postOptions.length; j++){
                         let singleOption = {
-                            optionValue : dataArray[i].postOptions[j].optionValue,
+                            optionValue : dataArray[i].postOptions[j],
                             votes : dataArray[i].postOptions[j].votes.length,
                             voters: dataArray[i].postOptions[j].votes
                         }
+                        optionArray.push(singleOption)
                     }
                 }
                 let singlePostObject = {
@@ -146,9 +149,16 @@ app.post('/getPosts', (req, res) => {
                     "timeStamp" : dataArray[i].timeStamp
                 }
                 responsePostObject.push(singlePostObject);
+                lastPost = i
             }
         }
-        res.send(responsePostObject)
+        console.log(lastPost + " " + dataArray.length)
+        if(lastPost + 1 < dataArray.length){
+            res.send({responsePostObject: responsePostObject, moreNext: true  })
+        }   
+        else{
+            res.send({responsePostObject: responsePostObject, moreNext: false })
+        }
     });
 });
 
