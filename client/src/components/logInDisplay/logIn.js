@@ -45,6 +45,11 @@ class LogIn extends React.Component{
                     Invalid Login Credentials
                 </div>
                 }
+                {this.props.hoverMenu &&
+                    <div className="message-container d-flex justify-content-center p-1">
+                            <p>Account sucessfully created, log in with your credentials</p>
+                    </div>
+                }
                 <div className="container">
                     <form className="d-flex flex-column align-items-center w-50 mx-auto" onSubmit={this.handleSubmit}>
                         <h2 className="mr-auto mb-3">Login Portal</h2>

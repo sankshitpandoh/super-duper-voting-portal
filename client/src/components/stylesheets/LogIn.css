@@ -1,6 +1,14 @@
 .log-in{
     height: 100vh;
 }
+.log-in .message-container{
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: green;
+    color: #fff;
+}
 .log-in .log-in-error{
     position: fixed;
     top: 0;
