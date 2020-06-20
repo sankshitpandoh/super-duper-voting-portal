@@ -80,21 +80,18 @@ app.post('/getUserDetails', (req, res) => {
 
 app.post('/getPosts', (req, res) => {
     let postBatch = req.body.postBatch * 10;
-    console.log(postBatch)
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let responsePostObject = [];
         if(dataArray.length / 10 >= postBatch){
             postBatch = postBatch;
             for(let i = postBatch - 9; i < dataArray.length; i++){
-                console.log(i)
                 responsePostObject.push(dataArray[i]);
             }
         }
         else{
             postBatch = dataArray.length % 10;
             for(let i = dataArray.length - postBatch + 1; i < dataArray.length; i++){
-                console.log(i)
                 responsePostObject.push(dataArray[i]);
             }
         }

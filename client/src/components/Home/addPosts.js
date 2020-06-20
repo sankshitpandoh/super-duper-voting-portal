@@ -2,6 +2,8 @@ import React from 'react';
 import '../stylesheets/Home/addPosts.css';
 import PostOptionsDisplay from'./PostOptionsDisplay.js';
 
+let timer = null;
+
 class HomeAddPosts extends React.Component{
     state={
         postTitle: "",
@@ -11,7 +13,13 @@ class HomeAddPosts extends React.Component{
         error: false,
         errorMessage: "",
         responseMessage: "",
-        responseStatus: false
+        responseStatus: false,
+
+    }
+    componentWillUnmount(){
+        if(timer){
+            clearTimeout(timer);
+        }
     }
 
     handlePostTitle = (e) => {
@@ -89,7 +97,7 @@ class HomeAddPosts extends React.Component{
                 errorMessage: "Post Title Cannot be Empty",
                 error: true
             },() => {
-                setTimeout( function(){
+                timer = setTimeout( function(){
                     this.setState({
                         error: false,
                         errorMessage: ""

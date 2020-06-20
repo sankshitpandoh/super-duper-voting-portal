@@ -1,9 +1,10 @@
 import React from 'react';
+import SinglePost from './SinglePost/singlePost.js';
 
 class HomeOverview extends React.Component{
     state={
         pageNo: 1,
-        postData: ""
+        postData: []
     }
 
     componentDidMount(){
@@ -19,12 +20,21 @@ class HomeOverview extends React.Component{
         };
         const response = await fetch('/getPosts', requestOptions);
         let serverResponse = await response.json();
-        console.log(serverResponse)
+        this.setState({
+            postData: serverResponse
+        })
     }
 
     render(){
+        const items = this.state.postData.map((x, index) =>{
+            return <SinglePost key={index} />
+        })
         return(
-            <h1>Overview</h1>
+            <div className="home-overview">
+                <div className="container">
+                    {items}
+                </div>
+            </div>
         )
     }
 }
