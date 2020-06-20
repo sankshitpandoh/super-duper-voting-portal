@@ -83,17 +83,19 @@ app.post('/getPosts', (req, res) => {
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let responsePostObject = [];
-        if(dataArray.length / 10 >= postBatch){
+        if(dataArray.length / 10 <= postBatch){
             postBatch = postBatch;
-            for(let i = postBatch - 9; i < dataArray.length; i++){
+            for(let i = postBatch - 9; i < postBatch; i++){
                 responsePostObject.push(dataArray[i]);
             }
+            // console.log("here")
         }
         else{
             postBatch = dataArray.length % 10;
             for(let i = dataArray.length - postBatch + 1; i < dataArray.length; i++){
                 responsePostObject.push(dataArray[i]);
             }
+            // console.log("here" + postBatch + " " + dataArray.length)
         }
         res.send(responsePostObject)
     });

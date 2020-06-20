@@ -1,4 +1,5 @@
 import React from 'react';
+import '../stylesheets/Home/homeOverview.css';
 import SinglePost from './SinglePost/singlePost.js';
 
 class HomeOverview extends React.Component{
@@ -27,16 +28,18 @@ class HomeOverview extends React.Component{
 
     render(){
         const items = this.state.postData.map((x, index) =>{
-            return <SinglePost key={index} />
+            return <SinglePost singlePostData = {x} key={index} />
         })
         return(
-            <div className="home-overview">
+            <div className="home-overview py-2">
                 <div className="container">
-                    {items}
+                    <div className="row">
+                        {items}
+                    </div>
                 </div>
             </div>
         )
-    }
+    } 
 }
 
 export default HomeOverview;
