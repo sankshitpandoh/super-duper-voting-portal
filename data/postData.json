@@ -1,10 +1,1 @@
-[{
-    "postId" : "post unique Id comes here",
-    "postTitle" : "Post Title Comes Here",
-    "postDescription" : "Post Description Comes here",
-    "postOptions" : [
-        {"optionValue" : "value1" , "votes" : []},
-        {"optionValue" : "value2" , "votes" : []}
-    ],
-    "timeStamp" : "time of post creation"
-}]
+[{"postId":"post unique Id comes here","postTitle":"Post Title Comes Here","postDescription":"Post Description Comes here","postOptions":[{"optionValue":"value1","votes":[]},{"optionValue":"value2","votes":[]}],"timeStamp":"time of post creation"},{"postId":"Ayg5Iu","postTitle":"This is a test post","postDescription":"test test test","postOptions":[],"timeStamp":"2020-06-20T15:57:28.996Z"}]

@@ -30,7 +30,7 @@ app.post('/logInUser' , (req, res) => {
 });
 
 /* API responsible for checking if the username entered has been use before or not */
-app.post('/api/checkUserName' , (req, res) => {
+app.post('/checkUserName' , (req, res) => {
     fs.readFile('./data/usersData.json' , (err,data) => {
       let dataArray = JSON.parse(data);
       let userNameAvailable = true;
@@ -46,7 +46,7 @@ app.post('/api/checkUserName' , (req, res) => {
 
 
 /* API responsible for registering / signing up a new user */
-app.post('/api/signUpUser', (req, res) => {
+app.post('/signUpUser', (req, res) => {
     let newUser = {
       username: req.body.username,
       password: crypto.createHash('sha1').update(req.body.password).digest('hex'),
@@ -75,6 +75,30 @@ app.post('/getUserDetails', (req, res) => {
             }
         }
         res.send({adminPrivilege: adminPrivilege})
+    });
+});
+
+app.post('/getPosts', (req, res) => {
+    let postBatch = req.body.postBatch * 10;
+    console.log(postBatch)
+    fs.readFile("./data/postData.json" , (err, data) => {
+        let dataArray = JSON.parse(data);
+        let responsePostObject = [];
+        if(dataArray.length / 10 >= postBatch){
+            postBatch = postBatch;
+            for(let i = postBatch - 9; i < dataArray.length; i++){
+                console.log(i)
+                responsePostObject.push(dataArray[i]);
+            }
+        }
+        else{
+            postBatch = dataArray.length % 10;
+            for(let i = dataArray.length - postBatch + 1; i < dataArray.length; i++){
+                console.log(i)
+                responsePostObject.push(dataArray[i]);
+            }
+        }
+        res.send(responsePostObject)
     });
 });
 
