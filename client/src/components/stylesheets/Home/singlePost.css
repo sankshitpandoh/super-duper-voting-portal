@@ -1,0 +1,25 @@
+.single-post{
+    /* min-height: 125px; */
+    background-color: rgba(255, 165, 165, 0.35);
+    border-radius: 5px;
+}
+.single-post h3{
+    font-family: 'Montserrat-Regular';
+    font-size: 20px;
+}
+.single-post .post-description{
+    font-family: 'Montserrat-Light';
+    font-size: 15px;
+}
+.single-post .single-post-option{
+    background-color: rgba(255, 165, 165, 0.55);
+    border-radius: 5px;
+    cursor: pointer;
+    position: relative;
+}
+.single-post .single-post-option span{
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+}

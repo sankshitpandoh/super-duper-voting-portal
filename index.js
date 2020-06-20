@@ -30,7 +30,7 @@ app.post('/logInUser' , (req, res) => {
 });
 
 /* API responsible for checking if the username entered has been use before or not */
-app.post('/api/checkUserName' , (req, res) => {
+app.post('/checkUserName' , (req, res) => {
     fs.readFile('./data/usersData.json' , (err,data) => {
       let dataArray = JSON.parse(data);
       let userNameAvailable = true;
@@ -46,7 +46,7 @@ app.post('/api/checkUserName' , (req, res) => {
 
 
 /* API responsible for registering / signing up a new user */
-app.post('/api/signUpUser', (req, res) => {
+app.post('/signUpUser', (req, res) => {
     let newUser = {
       username: req.body.username,
       password: crypto.createHash('sha1').update(req.body.password).digest('hex'),
@@ -78,16 +78,100 @@ app.post('/getUserDetails', (req, res) => {
     });
 });
 
+app.post('/getPosts', (req, res) => {
+    let postBatch;
+    let lastPost;
+    fs.readFile("./data/postData.json" , (err, data) => {
+        let dataArray = JSON.parse(data);
+        let responsePostObject = [];
+        if(dataArray.length / 10 >= req.body.postBatch){
+            postBatch = req.body.postBatch * 10;
+            for(let i = postBatch - 9; i <= postBatch; i++){
+                let optionArray = [];
+                if(req.body.adminPrivilege === false){
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                else{
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length,
+                            voters: dataArray[i].postOptions[j].votes
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                let singlePostObject = {
+                    "postId" : dataArray[i].postId,
+                    "postTitle" : dataArray[i].postTitle,
+                    "postDescription" : dataArray[i].postDescription,
+                    "postOptions" : optionArray,
+                    "timeStamp" : dataArray[i].timeStamp
+                }
+                responsePostObject.push(singlePostObject);
+                lastPost = i
+            }
+        }
+        else{
+            postBatch = dataArray.length % 10;
+            for(let i = dataArray.length - postBatch + 1; i < dataArray.length; i++){
+                let optionArray = [];
+                if(req.body.adminPrivilege === false){
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                else{
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length,
+                            voters: dataArray[i].postOptions[j].votes
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                let singlePostObject = {
+                    "postId" : dataArray[i].postId,
+                    "postTitle" : dataArray[i].postTitle,
+                    "postDescription" : dataArray[i].postDescription,
+                    "postOptions" : optionArray,
+                    "timeStamp" : dataArray[i].timeStamp
+                }
+                responsePostObject.push(singlePostObject);
+                lastPost = i
+            }
+        }
+        if(lastPost + 1 < dataArray.length){
+            res.send({responsePostObject: responsePostObject, moreNext: true  })
+        }   
+        else{
+            res.send({responsePostObject: responsePostObject, moreNext: false })
+        }
+    });
+});
+
 app.post('/addPost', (req, res) => {
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let optionArray = [];
-        for(let i = 0; i < req.body.options; i++){
+        for(let i = 0; i < req.body.options.length; i++){
             let singleOption = {
                 optionValue : req.body.options[i],
                 votes : []
             }
             optionArray.push(singleOption)
+            // console.log(optionArray)
         }
         let newPostObject = {
             postId : makePostId(),

@@ -57,7 +57,7 @@ class LogInDisplay extends React.Component{
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: x })
         };
-        const response = await fetch('/api/checkUserName', requestOptions);
+        const response = await fetch('/checkUserName', requestOptions);
         let serverResponse = await response.json();
         let flag = serverResponse.userNameAvailable; 
 
@@ -83,7 +83,7 @@ class LogInDisplay extends React.Component{
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify({ username: x , password: y })
         };
-        const response = await fetch('/api/signUpUser', requestOptions);
+        const response = await fetch('/signUpUser', requestOptions);
         let serverResponse = await response.json();
 
         /* if the user is successfully registered,
