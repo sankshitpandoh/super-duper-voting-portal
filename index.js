@@ -49,7 +49,9 @@ app.post('/api/checkUserName' , (req, res) => {
 app.post('/api/signUpUser', (req, res) => {
     let newUser = {
       username: req.body.username,
-      password: req.body.password
+      password: crypto.createHash('sha1').update(req.body.password).digest('hex'),
+      userId : makeUserId(),
+      adminPrivilege: false
     }
     fs.readFile('./data/usersData.json', (err, data) => {
       let dataArray = JSON.parse(data);
