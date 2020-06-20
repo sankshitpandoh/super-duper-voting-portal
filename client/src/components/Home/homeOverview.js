@@ -39,14 +39,19 @@ class HomeOverview extends React.Component{
     prevPage = () => {
         this.setState({
             pageNo: this.state.pageNo - 1
+        }, () => {
+            this.getPostData()
         })
     }
 
     nextPage = () => {
         this.setState({
             pageNo: this.state.pageNo + 1
+        }, () => {
+            this.getPostData()
         })
     }
+
     render(){
         const items = this.state.postData.map((x, index) =>{
             return <SinglePost singlePostData = {x} key={index} />
