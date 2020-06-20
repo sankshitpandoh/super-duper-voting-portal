@@ -50,6 +50,8 @@ class HomeAddPosts extends React.Component{
         this.setState({
             options: [...this.state.options, this.state.singleOption ],
             singleOption: ""
+        },() => {
+            console.log(this.state.options)
         })
     }
 

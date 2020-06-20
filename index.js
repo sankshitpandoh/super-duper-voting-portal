@@ -79,23 +79,74 @@ app.post('/getUserDetails', (req, res) => {
 });
 
 app.post('/getPosts', (req, res) => {
-    let postBatch = req.body.postBatch * 10;
+    let postBatch;
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let responsePostObject = [];
-        if(dataArray.length / 10 <= postBatch){
-            postBatch = postBatch;
+        if(dataArray.length / 10 >= req.body.postBatch){
+            postBatch = req.body.postBatch * 10;
             for(let i = postBatch - 9; i < postBatch; i++){
-                responsePostObject.push(dataArray[i]);
+                let optionArray = [];
+                if(req.body.adminPrivilege === false){
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                else{
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j],
+                            votes : dataArray[i].postOptions[j].votes.length,
+                            voters: dataArray[i].postOptions[j].votes
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                let singlePostObject = {
+                    "postId" : dataArray[i].postId,
+                    "postTitle" : dataArray[i].postTitle,
+                    "postDescription" : dataArray[i].postDescription,
+                    "postOptions" : optionArray,
+                    "timeStamp" : dataArray[i].timeStamp
+                }
+                responsePostObject.push(singlePostObject);
             }
-            // console.log("here")
         }
         else{
             postBatch = dataArray.length % 10;
             for(let i = dataArray.length - postBatch + 1; i < dataArray.length; i++){
-                responsePostObject.push(dataArray[i]);
+                let optionArray = [];
+                if(req.body.adminPrivilege === false){
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j].optionValue,
+                            votes : dataArray[i].postOptions[j].votes.length
+                        }
+                        optionArray.push(singleOption)
+                    }
+                }
+                else{
+                    for(let j = 0; j < dataArray[i].postOptions.length; j++){
+                        let singleOption = {
+                            optionValue : dataArray[i].postOptions[j].optionValue,
+                            votes : dataArray[i].postOptions[j].votes.length,
+                            voters: dataArray[i].postOptions[j].votes
+                        }
+                    }
+                }
+                let singlePostObject = {
+                    "postId" : dataArray[i].postId,
+                    "postTitle" : dataArray[i].postTitle,
+                    "postDescription" : dataArray[i].postDescription,
+                    "postOptions" : optionArray,
+                    "timeStamp" : dataArray[i].timeStamp
+                }
+                responsePostObject.push(singlePostObject);
             }
-            // console.log("here" + postBatch + " " + dataArray.length)
         }
         res.send(responsePostObject)
     });
@@ -105,12 +156,13 @@ app.post('/addPost', (req, res) => {
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
         let optionArray = [];
-        for(let i = 0; i < req.body.options; i++){
+        for(let i = 0; i < req.body.options.length; i++){
             let singleOption = {
                 optionValue : req.body.options[i],
                 votes : []
             }
             optionArray.push(singleOption)
+            // console.log(optionArray)
         }
         let newPostObject = {
             postId : makePostId(),

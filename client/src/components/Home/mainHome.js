@@ -41,7 +41,7 @@ class MainHome extends React.Component{
                         case 2 : 
                             return <HomeSettings />
                         default :
-                            return <HomeOverview />
+                            return <HomeOverview adminPrivilege = {this.props.adminPrivilege} />
                     }
                 })()
                 :
@@ -50,7 +50,7 @@ class MainHome extends React.Component{
                         case 1 :
                             return <HomeSettings />
                         default :
-                            return <HomeOverview />
+                            return <HomeOverview adminPrivilege = {this.props.adminPrivilege} />
                     }
                 })()
                 }
