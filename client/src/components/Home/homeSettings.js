@@ -111,10 +111,10 @@ class HomeSettings extends React.Component{
 
     render(){
         return(
-            <div className="settings-main-display">
+            <div className="settings-main-display d-flex flex-column py-3 px-5">
                 {this.state.hoverMessage &&
                     <div
-                    className={"message-container " + (this.state.changeStatus ? 'changed' : 'error')}>
+                    className={"d-flex  justify-content-center p-1 message-container " + (this.state.changeStatus ? 'changed' : 'error')}>
                         {this.state.changeStatus ?
                             <p>Password changed successfully!</p>
                             :
@@ -122,21 +122,21 @@ class HomeSettings extends React.Component{
                         }
                     </div>
                 }
-                <div className="password-change">
-                    <h3>Change Password</h3>
-                    <span>
+                <div className="password-change d-flex flex-column">
+                    <h3 className="mb-4">Change Password</h3>
+                    <span className="d-flex flex-column mb-4 w-50">
                         Enter Old Password:
                         <input type="password" value={this.state.oldPassword} onChange={this.handleOldPassword} placeholder="old password here"/>
                     </span>
-                    <span>
+                    <span className="d-flex flex-column mb-4 w-50">
                         Enter New Password:
                         <input type="password" value={this.state.newPassword} onChange={this.handleNewPassword} placeholder="new password here"/>
-                        <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
+                        <button className="py-1 px-2" onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
-                    <span>
-                        Enter New Password Again: {!this.state.pMatch && <p>Passwords don't match</p>}
+                    <span className="d-flex flex-column mb-4 w-50">
+                        Enter New Password Again: {!this.state.pMatch && <p className="p-1">Passwords don't match</p>}
                         <input type="password" value={this.state.reNewPassword} onChange={this.handleReNewPassword} placeholder="re enter new password here"/>
-                        <button onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
+                        <button className="py-1 px-2" onMouseDown={this.displayPassword} onMouseUp={this.displayPassword}>Show</button>
                     </span>
                     <button onClick = {this.changePassword} disabled={this.state.disabled}>Update Password</button>
                 </div>
