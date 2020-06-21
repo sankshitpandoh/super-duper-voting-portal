@@ -1,6 +1,7 @@
 .home-overview{
     overflow-y: auto;
     position: relative;
+    width: 85%;
 }
 .expaned-post-container{
     position: fixed;
@@ -15,4 +16,34 @@
     position: fixed;
     right: 15px;
     top: 15px;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+.expaned-post-container .hide-post:hover{
+    color: rgba(255,255,255,0.75);
+}
+.home-overview .pagination-buttons-container button{
+    border: 0;
+    font-family: "OpenSans";
+    cursor: pointer;
+    background-color: #440381;
+    border: 1px solid #440381;
+    color: #fff;
+    transition: 0.25s all;
+}
+.home-overview .pagination-buttons-container button:hover{
+    background-color: #fff;
+    color: #440381;
+}
+.home-overview .pagination-buttons-container button:disabled{
+    opacity: 0.45;
+    cursor: default;
+}
+.home-overview .pagination-buttons-container button:disabled:hover{
+    background-color: #440381;
+    color: #fff;
 }

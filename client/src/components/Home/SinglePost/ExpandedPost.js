@@ -29,14 +29,14 @@ class ExpanedPost extends React.Component{
         })
         return(
             <div className="single-expanded-post d-flex flex-column w-75 align-items-center">
-                <h3 className="mb-2">{this.props.expandedPostData.postTitle}</h3>
+                <h3 className="mb-2 text-center">{this.props.expandedPostData.postTitle}</h3>
                 {this.props.expandedPostData.postDescription !== "" &&
                         <p className="post-description mb-2">{this.props.expandedPostData.postDescription}</p>
                     }
                     <div className="d-flex flex-column w-100">
                         {options}
                     </div>
-                    <button onClick={() => {this.props.deletePost(this.props.expandedPostData.postId)}} className="delete-post mt-2 mx-2 ">Delete</button>
+                    <button className="py-1 px-2 delete-post mt-2 mx-2 " onClick={() => {this.props.deletePost(this.props.expandedPostData.postId)}} >Delete</button>
             </div>
         )
     }

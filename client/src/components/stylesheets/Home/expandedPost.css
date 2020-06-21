@@ -2,6 +2,41 @@
     background-color: #fff;
     border-radius: 5px;
     position: relative;
+    color: #000;
+}
+.single-expanded-post h3{
+    width: 70%;
+    font-size: 20px;
+    font-family: 'Montserrat-Regular';
+    text-transform: capitalize;
+}
+.single-expanded-post .post-description{
+    font-family: 'Montserrat-Light';
+    font-size: 15px;
+    text-transform: capitalize;
+}
+.single-expanded-post .single-post-option p{
+    font-family: 'Montserrat-Regular';
+    text-transform: capitalize;
+}
+.single-expanded-post .single-post-option span{
+    font-family: 'OpenSans';
+}
+.single-expanded-post .single-post-option .single-voter{
+    font-family: 'Montserrat-Light';
+    text-transform: capitalize;
+}
+.single-expanded-post button{
+    background-color: #440381;
+    border: 1px solid #440381;
+    color: #fff;
+    font-family: 'Montserrat-Bold';
+    cursor: pointer;
+    transition: 0.5s all;
+}
+.single-expanded-post button:hover{
+    background-color: #fff;
+    color: #440381;
 }
 .voters-list{
     width: 70%;

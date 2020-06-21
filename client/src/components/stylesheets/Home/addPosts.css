@@ -4,14 +4,14 @@
 }
 .add-posts-container .post-error-message{
     position: fixed;
-    background-color: red;
+    background-color: rgba(255,0,0,0.85);
     color: #fff;
     font-family: 'Montserrat-Regular';
     z-index: 10;
 }
 .add-posts-container .post-response-message{
     position: fixed;
-    background-color: green;
+    background-color: rgba(0,255,0,0.95);
     color: #fff;
     font-family: 'Montserrat-Regular';
     z-index: 10;

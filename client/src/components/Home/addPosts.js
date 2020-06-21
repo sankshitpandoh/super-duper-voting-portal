@@ -119,7 +119,7 @@ class HomeAddPosts extends React.Component{
         return(
             <div className="add-posts-container d-flex">
                 {this.state.error &&
-                    <div className="post-error-message d-flex justify-content-center p-1 w-100">
+                    <div className="post-error-message d-flex align-items-center text-center justify-content-center p-1 w-100">
                         {this.state.errorMessage}
                     </div>
                 }

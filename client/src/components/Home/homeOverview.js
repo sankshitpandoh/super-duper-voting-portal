@@ -121,7 +121,7 @@ class HomeOverview extends React.Component{
             return <SinglePost singlePostData = {x} key={index} userVoteData = {this.state.userVoteData} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} handleUserVote = {this.handleUserVote} />
         })
         return(
-            <div className="home-overview w-100 py-2" style={{ overflowY: `${this.state.expandPost ? "hidden" : "auto" }`}}>
+            <div className="home-overview py-2" style={{ overflowY: `${this.state.expandPost ? "hidden" : "auto" }`}}>
                 <div className="container">
                     <div className="row">
                         {items}
@@ -129,12 +129,12 @@ class HomeOverview extends React.Component{
                     {this.state.expandPost &&
                         <div className="expaned-post-container d-flex flex-column align-items-center justify-content-center">
                             <ExpanedPost expandedPostData ={this.state.expandedPostData} deletePost= {this.deletePost} />
-                            <button className="hide-post" onClick={this.hideExpandedPost}>Close</button>
+                            <button className="hide-post" onClick={this.hideExpandedPost}>&#10006;</button>
                         </div>
                     }
-                    <div className="pagination-buttons-container pb-2">
-                        <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
-                        <button disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
+                    <div className="pagination-buttons-container pb-2 d-flex justify-content-center align-items-center">
+                        <button className="mr-1" disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
+                        <button className="ml-1" disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
                     </div>
                 </div>
             </div>
