@@ -1,6 +1,7 @@
 .home-overview{
     overflow-y: auto;
     position: relative;
+    width: 85%;
 }
 .expaned-post-container{
     position: fixed;
