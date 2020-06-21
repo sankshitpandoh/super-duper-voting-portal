@@ -88,9 +88,22 @@ class HomeOverview extends React.Component{
         })
     }
 
+    handleUserVote = async(pId , oId) => {
+        let uId = localStorage.getItem('userId')
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ postId: pId, batchNo: this.state.pageNo, optionId: oId, userId: uId})
+        };
+        const response = await fetch('/userVote', requestOptions);
+        let serverResponse = await response.json();
+        serverResponse.postDeleted && 
+            this.getPostData()
+    }
+
     render(){
         const items = this.state.postData.map((x, index) =>{
-            return <SinglePost singlePostData = {x} key={index} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} />
+            return <SinglePost singlePostData = {x} key={index} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} handleUserVote = {this.handleUserVote} />
         })
         return(
             <div className="home-overview w-100 py-2" style={{ overflowY: `${this.state.expandPost ? "hidden" : "auto" }`}}>

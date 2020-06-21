@@ -206,6 +206,10 @@ app.post('/addPost', (req, res) => {
     });
 });
 
+app.post('/userVote', (req,res) => {
+    
+})
+
 /* Generates unique id for a new Post */
 function makePostId(){
     let result = '';
