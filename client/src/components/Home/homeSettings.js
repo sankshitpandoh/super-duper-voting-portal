@@ -88,9 +88,9 @@ class HomeSettings extends React.Component{
             headers: { 'Content-Type': 'application/json' },
             /* the object that is being sent to server
             it contains, username, old password and new password */
-            body: JSON.stringify({ username: this.props.user , oldPassword: this.state.oldPassword, newPassword: this.state.newPassword })
+            body: JSON.stringify({ userId: localStorage.getItem('userId') , oldPassword: this.state.oldPassword, newPassword: this.state.newPassword })
         };
-        const response = await fetch('/api/changePassword', requestOptions);
+        const response = await fetch('/changePassword', requestOptions);
         let serverResponse = await response.json();
         this.setState({
             hoverMessage: true,
