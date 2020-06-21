@@ -29,7 +29,7 @@ class SinglePost extends React.Component{
         :
         (() => {
             singleItem = <div className="col-12 mb-3" onClick ={() => {this.props.adminPrivilege && this.props.expandPost(this.props.singlePostData.postId)}}>
-            <div className="single-post d-flex flex-column p-2">
+            <div className="single-post d-flex flex-column p-2" style={{ cursor: `${this.props.adminPrivilege ? "pointer" : "default"}` }}>
                 <h3 className="mb-2">{this.props.singlePostData.postTitle}</h3>
                     {this.props.singlePostData.postDescription !== "" &&
                         <p className="post-description mb-2">{this.props.singlePostData.postDescription}</p>

@@ -41,7 +41,7 @@
 }
 .home-overview .pagination-buttons-container button:disabled{
     opacity: 0.45;
-    cursor: default;
+    cursor: not-allowed !important;
 }
 .home-overview .pagination-buttons-container button:disabled:hover{
     background-color: #440381;
