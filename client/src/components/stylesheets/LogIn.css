@@ -17,6 +17,34 @@
     background-color: rgba(255,0,0,0.8);
     color: #fff;
 }
+.log-in .log-in-container{
+    background-color: #FF5D73;
+    border-radius: 10px;
+}
+.log-in .log-in-container span input{
+    border: 0;
+    background-color: transparent;
+    border-bottom: 2px solid #FFF; 
+    font-family: 'Montserrat-Regular';
+    font-weight: 300;
+}
+.log-in .log-in-container span input::placeholder{
+    opacity: 0.35;
+    color: #FFF;
+}
+.log-in .log-in-container .submit-button{
+    border: 0;
+    background-color: #FFF;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: 0.5s all;
+    border: 1px solid #FFF;
+    font-family: 'Montserrat-Regular';
+}
+.log-in .log-in-container .submit-button:hover{
+    background-color: transparent;
+    color: #FFF;
+}
 .log-in form h2{   
     font-family: 'Montserrat-Bold';
 }
