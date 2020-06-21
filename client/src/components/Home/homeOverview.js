@@ -27,7 +27,6 @@ class HomeOverview extends React.Component{
 
     getPostData = async() => {
         /* making a post request to server with new user credentials */
-        console.log(this.props.adminPrivilege)
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -60,8 +59,17 @@ class HomeOverview extends React.Component{
         })
     }
 
-    deletePost = () => {
-        console.log("hey")
+    deletePost = async(pId) => {
+        this.hideExpandedPost();
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ postId: pId, batchNo: this.state.pageNo})
+        };
+        const response = await fetch('/deletePost', requestOptions);
+        let serverResponse = await response.json();
+        serverResponse.postDeleted && 
+            this.getPostData()
     }
 
     prevPage = () => {

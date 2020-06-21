@@ -36,7 +36,7 @@ class ExpanedPost extends React.Component{
                     <div className="d-flex flex-column w-100">
                         {options}
                     </div>
-                    <button onClick={this.props.deletePost} className="delete-post mt-2 mx-2 ">Delete</button>
+                    <button onClick={() => {this.props.deletePost(this.props.expandedPostData.postId)}} className="delete-post mt-2 mx-2 ">Delete</button>
             </div>
         )
     }

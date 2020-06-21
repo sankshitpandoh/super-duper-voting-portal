@@ -161,6 +161,23 @@ app.post('/getPosts', (req, res) => {
     });
 });
 
+app.post('/deletePost' ,(req,res) => {
+    fs.readFile("./data/postData.json" , (err, data) =>{
+        let dataArray = JSON.parse(data);
+        for(let i = (req.body.batchNo * 10 - 10); i < (req.body.batchNo * 10) ; i++){
+            if(req.body.postId === dataArray[i].postId){
+                dataArray.splice(i,1);
+                break;
+            }
+        }
+        fs.writeFile("./data/postData.json", JSON.stringify(dataArray), function(err){
+            if (err) throw err;
+            console.log('The post was successfully deleted from the file ');
+            res.send({postDeleted : true})
+          });
+    })
+})
+
 app.post('/addPost', (req, res) => {
     fs.readFile("./data/postData.json" , (err, data) => {
         let dataArray = JSON.parse(data);
