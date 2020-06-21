@@ -252,6 +252,34 @@ app.post('/userVote', (req,res) => {
     });
 });
 
+/* API called when user wants to change it's password */
+app.post('/changePassword', (req, res) => {
+    let hashPwdOld = crypto.createHash('sha1').update(req.body.oldPassword).digest('hex');
+    let hashPwdNew = crypto.createHash('sha1').update(req.body.newPassword).digest('hex');
+    fs.readFile('./data/usersData.json', (err, data) => {
+      let status = false;
+      let dataArray = JSON.parse(data);
+  
+      for(let i = 0; i < dataArray.length; i++){
+        if(dataArray[i].userId === req.body.userId && dataArray[i].password === hashPwdOld){
+          dataArray[i].password = hashPwdNew;
+          status = true;
+          break;
+        }
+      }
+      if(status){
+        fs.writeFile("./data/usersData.json", JSON.stringify(dataArray), function(err){
+          if (err) throw err;
+          console.log('The password was successfully changed');
+          res.send({passwordChange: status})
+        });
+      }
+      else{
+        res.send({passwordChange: status})
+      }
+    });
+  });
+
 /* Generates unique id for a new Post */
 function makePostId(){
     let result = '';
