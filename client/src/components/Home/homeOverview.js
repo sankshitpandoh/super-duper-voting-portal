@@ -4,25 +4,37 @@ import SinglePost from './SinglePost/singlePost.js';
 import ExpanedPost from './SinglePost/ExpandedPost.js';
 
 class HomeOverview extends React.Component{
-    // constructor(props){
-    //     super(props)
-    // }
     state={
         pageNo: 1,
         postData: [],
         moreNext: false,
         expandPost: false,
-        expandedPostData: null
+        expandedPostData: null,
+        userVoteData: []
     }
 
     componentDidMount(){
             this.getPostData();
+            this.getUserData(localStorage.getItem('userId'))
     }
 
     componentDidUpdate(prevProps, prevState){
         if (prevProps.adminPrivilege !== undefined && this.props.adminPrivilege !== prevProps.adminPrivilege){
             this.getPostData();
         }
+    }
+
+    getUserData = async(uId) => {
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ userId: uId })
+        };
+        const response = await fetch('/getUserData', requestOptions);
+        let serverResponse = await response.json();
+        this.setState({
+            userVoteData: serverResponse.postsVotedOn
+        })
     }
 
     getPostData = async() => {
@@ -98,13 +110,15 @@ class HomeOverview extends React.Component{
         const response = await fetch('/userVote', requestOptions);
         let serverResponse = await response.json();
         serverResponse.voteRecordStatus && 
-            this.getPostData();
+            (() => {
+                this.getPostData();
+                this.getUserData(localStorage.getItem('userId'));
+            })()
     }
 
     render(){
-        let uId = localStorage.getItem('userId');
         const items = this.state.postData.map((x, index) =>{
-            return <SinglePost singlePostData = {x} key={index} userId = {uId} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} handleUserVote = {this.handleUserVote} />
+            return <SinglePost singlePostData = {x} key={index} userVoteData = {this.state.userVoteData} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} handleUserVote = {this.handleUserVote} />
         })
         return(
             <div className="home-overview w-100 py-2" style={{ overflowY: `${this.state.expandPost ? "hidden" : "auto" }`}}>

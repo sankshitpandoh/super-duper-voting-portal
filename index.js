@@ -207,6 +207,20 @@ app.post('/addPost', (req, res) => {
     });
 });
 
+app.post("/getUserData" , (req, res) => {
+    let postsVotedOn;
+    fs.readFile("./data/usersData.json" , (err, data) => {
+        let dataArray = JSON.parse(data);
+        for(let i = 0; i < dataArray.length; i++){
+            if(dataArray[i].userId === req.body.userId){
+                postsVotedOn = dataArray[i].postsVotedOn;
+                break;
+            }
+        }
+        res.send({postsVotedOn: postsVotedOn});
+    })
+})
+
 app.post('/userVote', (req,res) => {
     let username;
     fs.readFile("./data/usersData.json" , (err, data) => {
