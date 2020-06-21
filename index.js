@@ -232,11 +232,11 @@ app.post('/userVote', (req,res) => {
                     if(err) throw err;
                     console.log("the vote was sucessfully recorded");
                     res.send({voteRecordStatus : true})
-                })
-            })
-        })
-    })
-})
+                });
+            });
+        });
+    });
+});
 
 /* Generates unique id for a new Post */
 function makePostId(){
