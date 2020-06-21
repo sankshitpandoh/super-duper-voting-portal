@@ -5,7 +5,7 @@ let votersList;
 class ExpanedPost extends React.Component{
     render(){
         const options = this.props.expandedPostData.postOptions.map((x,index) => {
-            return <div className="col-12 mb-2" key={index}>
+            return <div className="d-flex w-100 mb-2 px-2" key={index}>
                 <div className="single-post-option w-100 p-1 d-flex align-items-center">
                     <p className="w-25">{x.optionValue.optionValue}</p>
                     <span className="d-flex align-items-center p-1">{x.votes}</span>
