@@ -3,11 +3,11 @@
     position: relative;
 }
 .expaned-post-container{
-    position: absolute;
-    left: 0;
+    position: fixed;
+    left: 13%;
     right: 0;
     top: 0;
-    bottom: 0;
+    height: 100%;
     background-color: rgba(0,0,0,0.85);
     z-index: 5;
 }
