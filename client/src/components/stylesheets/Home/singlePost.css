@@ -1,7 +1,7 @@
 .single-post{
-    /* min-height: 125px; */
     background-color: rgba(255, 165, 165, 0.35);
     border-radius: 5px;
+    color: #000;
 }
 .single-post h3{
     font-family: 'Montserrat-Regular';
@@ -26,6 +26,7 @@
 .already-voted{
     background-color: #a09da3 !important;
     transition: 0.5s all;
+    color: #444;
 }
 .already-voted-options{
     transition: 0.5s all;
