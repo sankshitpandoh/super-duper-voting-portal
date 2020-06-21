@@ -53,6 +53,17 @@ class HomeOverview extends React.Component{
         }    
     }
 
+    hideExpandedPost = () => {
+        this.setState({
+            expandPost: false,
+            expandedPostData: null
+        })
+    }
+
+    deletePost = () => {
+        console.log("hey")
+    }
+
     prevPage = () => {
         this.setState({
             pageNo: this.state.pageNo - 1
@@ -81,7 +92,8 @@ class HomeOverview extends React.Component{
                     </div>
                     {this.state.expandPost &&
                         <div className="expaned-post-container d-flex flex-column align-items-center justify-content-center">
-                            <ExpanedPost expandedPostData ={this.state.expandedPostData} />
+                            <ExpanedPost expandedPostData ={this.state.expandedPostData} deletePost= {this.deletePost} />
+                            <button className="hide-post" onClick={this.hideExpandedPost}>Close</button>
                         </div>
                     }
                     <div className="pagination-buttons-container pb-2">

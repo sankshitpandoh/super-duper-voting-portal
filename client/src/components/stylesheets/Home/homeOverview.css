@@ -9,4 +9,10 @@
     top: 0;
     bottom: 0;
     background-color: rgba(0,0,0,0.85);
+    z-index: 5;
+}
+.expaned-post-container .hide-post{
+    position: fixed;
+    right: 15px;
+    top: 15px;
 }
