@@ -132,9 +132,9 @@ class HomeOverview extends React.Component{
                             <button className="hide-post" onClick={this.hideExpandedPost}>&#10006;</button>
                         </div>
                     }
-                    <div className="pagination-buttons-container pb-2">
-                        <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
-                        <button disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
+                    <div className="pagination-buttons-container pb-2 d-flex justify-content-center align-items-center">
+                        <button className="mr-1" disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
+                        <button className="ml-1" disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
                     </div>
                 </div>
             </div>
