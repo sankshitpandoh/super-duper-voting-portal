@@ -97,7 +97,7 @@ class HomeOverview extends React.Component{
         };
         const response = await fetch('/userVote', requestOptions);
         let serverResponse = await response.json();
-        serverResponse.postDeleted && 
+        serverResponse.voteRecordStatus && 
             this.getPostData()
     }
 

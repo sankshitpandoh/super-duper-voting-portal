@@ -51,7 +51,8 @@ app.post('/signUpUser', (req, res) => {
       username: req.body.username,
       password: crypto.createHash('sha1').update(req.body.password).digest('hex'),
       userId : makeUserId(),
-      adminPrivilege: false
+      adminPrivilege: false,
+      postsVotedOn : []
     }
     fs.readFile('./data/usersData.json', (err, data) => {
       let dataArray = JSON.parse(data);
@@ -207,7 +208,34 @@ app.post('/addPost', (req, res) => {
 });
 
 app.post('/userVote', (req,res) => {
-    
+    let username;
+    fs.readFile("./data/usersData.json" , (err, data) => {
+        let dataArray = JSON.parse(data);
+        for(let i = 0; i < dataArray.length; i++){
+            if(req.body.userId === dataArray[i].userId){
+                username = dataArray[i].username;
+                dataArray[i].postsVotedOn.push(req.body.postId)
+                break;
+            }
+        }
+        fs.writeFile("./data/usersData.json", JSON.stringify(dataArray), function(err){
+            if(err) throw err;
+            fs.readFile("./data/postData.json" , (err, data) => {
+                let postDataArray = JSON.parse(data);
+                for(let i = (req.body.batchNo * 10 - 10); i < (req.body.batchNo * 10) ; i++){
+                    if(postDataArray[i].postId === req.body.postId){
+                        postDataArray[i].postOptions[req.body.optionId].votes.push(username);
+                        break;
+                    }
+                }
+                fs.writeFile("./data/postData.json" , JSON.stringify(postDataArray) , function(err){
+                    if(err) throw err;
+                    console.log("the vote was sucessfully recorded");
+                    res.send({voteRecordStatus : true})
+                })
+            })
+        })
+    })
 })
 
 /* Generates unique id for a new Post */
