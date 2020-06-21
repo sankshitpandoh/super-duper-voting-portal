@@ -1,6 +1,7 @@
 import React from 'react';
 import '../stylesheets/Home/homeOverview.css';
 import SinglePost from './SinglePost/singlePost.js';
+import ExpanedPost from './SinglePost/ExpandedPost.js';
 
 class HomeOverview extends React.Component{
     // constructor(props){
@@ -9,7 +10,9 @@ class HomeOverview extends React.Component{
     state={
         pageNo: 1,
         postData: [],
-        moreNext: false
+        moreNext: false,
+        expandPost: false,
+        expandedPostData: null
     }
 
     componentDidMount(){
@@ -24,7 +27,6 @@ class HomeOverview extends React.Component{
 
     getPostData = async() => {
         /* making a post request to server with new user credentials */
-        console.log(this.props.adminPrivilege)
         const requestOptions = {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
@@ -36,6 +38,38 @@ class HomeOverview extends React.Component{
             postData: serverResponse.responsePostObject,
             moreNext: serverResponse.moreNext
         })
+    }
+
+    expandPost = (pId) => {
+        for(let i = 0; i < this.state.postData.length; i++){
+            if(pId === this.state.postData[i].postId){
+                this.setState({
+                    expandedPostData: this.state.postData[i],
+                    expandPost: true
+                })
+                break;
+            }
+        }    
+    }
+
+    hideExpandedPost = () => {
+        this.setState({
+            expandPost: false,
+            expandedPostData: null
+        })
+    }
+
+    deletePost = async(pId) => {
+        this.hideExpandedPost();
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ postId: pId, batchNo: this.state.pageNo})
+        };
+        const response = await fetch('/deletePost', requestOptions);
+        let serverResponse = await response.json();
+        serverResponse.postDeleted && 
+            this.getPostData()
     }
 
     prevPage = () => {
@@ -54,16 +88,36 @@ class HomeOverview extends React.Component{
         })
     }
 
+    handleUserVote = async(pId , oId) => {
+        let uId = localStorage.getItem('userId');
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ postId: pId, batchNo: this.state.pageNo, optionId: oId, userId: uId})
+        };
+        const response = await fetch('/userVote', requestOptions);
+        let serverResponse = await response.json();
+        serverResponse.voteRecordStatus && 
+            this.getPostData();
+    }
+
     render(){
+        let uId = localStorage.getItem('userId');
         const items = this.state.postData.map((x, index) =>{
-            return <SinglePost singlePostData = {x} key={index} />
+            return <SinglePost singlePostData = {x} key={index} userId = {uId} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} handleUserVote = {this.handleUserVote} />
         })
         return(
-            <div className="home-overview w-100 py-2">
+            <div className="home-overview w-100 py-2" style={{ overflowY: `${this.state.expandPost ? "hidden" : "auto" }`}}>
                 <div className="container">
                     <div className="row">
                         {items}
                     </div>
+                    {this.state.expandPost &&
+                        <div className="expaned-post-container d-flex flex-column align-items-center justify-content-center">
+                            <ExpanedPost expandedPostData ={this.state.expandedPostData} deletePost= {this.deletePost} />
+                            <button className="hide-post" onClick={this.hideExpandedPost}>Close</button>
+                        </div>
+                    }
                     <div className="pagination-buttons-container pb-2">
                         <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
                         <button disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>

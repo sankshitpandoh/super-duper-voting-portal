@@ -1,3 +1,18 @@
 .home-overview{
     overflow-y: auto;
+    position: relative;
+}
+.expaned-post-container{
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-color: rgba(0,0,0,0.85);
+    z-index: 5;
+}
+.expaned-post-container .hide-post{
+    position: fixed;
+    right: 15px;
+    top: 15px;
 }
