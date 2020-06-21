@@ -15,4 +15,13 @@
     position: fixed;
     right: 15px;
     top: 15px;
+    background-color: transparent;
+    border: 0;
+    color: #fff;
+    font-size: 30px;
+    cursor: pointer;
+    transition: 0.5s all;
+}
+.expaned-post-container .hide-post:hover{
+    color: rgba(255,255,255,0.75);
 }

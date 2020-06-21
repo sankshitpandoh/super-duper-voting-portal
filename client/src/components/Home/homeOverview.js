@@ -129,7 +129,7 @@ class HomeOverview extends React.Component{
                     {this.state.expandPost &&
                         <div className="expaned-post-container d-flex flex-column align-items-center justify-content-center">
                             <ExpanedPost expandedPostData ={this.state.expandedPostData} deletePost= {this.deletePost} />
-                            <button className="hide-post" onClick={this.hideExpandedPost}>Close</button>
+                            <button className="hide-post" onClick={this.hideExpandedPost}>&#10006;</button>
                         </div>
                     }
                     <div className="pagination-buttons-container pb-2">
