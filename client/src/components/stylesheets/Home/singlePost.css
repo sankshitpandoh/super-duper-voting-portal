@@ -24,5 +24,11 @@
     right: 0;
 }
 .already-voted{
-    background-color: red;
+    background-color: #a09da3 !important;
+    transition: 0.5s all;
+}
+.already-voted-options{
+    transition: 0.5s all;
+    background-color: grey !important;
+    cursor: default !important;
 }
