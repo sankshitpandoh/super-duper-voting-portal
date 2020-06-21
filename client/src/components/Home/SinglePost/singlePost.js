@@ -1,18 +1,10 @@
 import React from 'react';
-import '../../stylesheets/Home/singlePost.css'
+import '../../stylesheets/Home/singlePost.css';
+import Options from './options.js'
 
 let singleItem;
 class SinglePost extends React.Component{
-
     render(){
-        const options = this.props.singlePostData.postOptions.map((x,index) => {
-            return <div className="col-6 mb-2" key={index}>
-                <div className="single-post-option p-1 d-flex justify-content-center align-items-center" onClick ={() => {!this.props.adminPrivilege && this.props.handleUserVote(this.props.singlePostData.postId, index)}}>
-                    <p>{x.optionValue.optionValue}</p>
-                    <span className="d-flex align-items-center p-1">{x.votes}</span>
-                </div>
-            </div>
-        })
         let alreadyVoted = false;
         for(let i = 0; i < this.props.userVoteData.length; i++){
             if(this.props.userVoteData[i] === this.props.singlePostData.postId){
@@ -29,7 +21,7 @@ class SinglePost extends React.Component{
                     <p className="post-description mb-2">{this.props.singlePostData.postDescription}</p>
                 }
                 <div className="row">
-                    {options}
+                    <Options alreadyVoted = {alreadyVoted} singlePostData = {this.props.singlePostData} adminPrivilege = {this.props.adminPrivilege} handleUserVote = {this.props.handleUserVote}/>
                 </div>
             </div>
         </div>
@@ -43,7 +35,7 @@ class SinglePost extends React.Component{
                         <p className="post-description mb-2">{this.props.singlePostData.postDescription}</p>
                     }
                     <div className="row">
-                        {options}
+                        <Options alreadyVoted = {alreadyVoted} singlePostData = {this.props.singlePostData} adminPrivilege = {this.props.adminPrivilege} handleUserVote = {this.props.handleUserVote} />
                     </div>
             </div>
         </div>
