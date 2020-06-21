@@ -1,6 +1,7 @@
 import React from 'react';
 import '../stylesheets/Home/homeOverview.css';
 import SinglePost from './SinglePost/singlePost.js';
+import ExpanedPost from './SinglePost/ExpandedPost.js';
 
 class HomeOverview extends React.Component{
     // constructor(props){
@@ -9,7 +10,9 @@ class HomeOverview extends React.Component{
     state={
         pageNo: 1,
         postData: [],
-        moreNext: false
+        moreNext: false,
+        expandPost: false,
+        expandedPostData: null
     }
 
     componentDidMount(){
@@ -38,6 +41,18 @@ class HomeOverview extends React.Component{
         })
     }
 
+    expandPost = (pId) => {
+        for(let i = 0; i < this.state.postData.length; i++){
+            if(pId === this.state.postData[i].postId){
+                this.setState({
+                    expandedPostData: this.state.postData[i],
+                    expandPost: true
+                })
+                break;
+            }
+        }    
+    }
+
     prevPage = () => {
         this.setState({
             pageNo: this.state.pageNo - 1
@@ -56,7 +71,7 @@ class HomeOverview extends React.Component{
 
     render(){
         const items = this.state.postData.map((x, index) =>{
-            return <SinglePost singlePostData = {x} key={index} />
+            return <SinglePost singlePostData = {x} key={index} adminPrivilege={this.props.adminPrivilege} expandPost = {this.expandPost} />
         })
         return(
             <div className="home-overview w-100 py-2">
@@ -64,6 +79,11 @@ class HomeOverview extends React.Component{
                     <div className="row">
                         {items}
                     </div>
+                    {this.state.expandPost &&
+                        <div className="expaned-post-container d-flex flex-column align-items-center justify-content-center">
+                            <ExpanedPost expandedPostData ={this.state.expandedPostData} />
+                        </div>
+                    }
                     <div className="pagination-buttons-container pb-2">
                         <button disabled={this.state.pageNo === 1} onClick={this.prevPage}>Prev</button>
                         <button disabled={!this.state.moreNext} onClick={this.nextPage}>Next</button>
