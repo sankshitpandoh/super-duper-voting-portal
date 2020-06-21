@@ -23,3 +23,6 @@
     bottom: 0;
     right: 0;
 }
+.already-voted{
+    background-color: red;
+}
