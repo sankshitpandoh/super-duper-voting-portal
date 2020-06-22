@@ -20,7 +20,9 @@ class Options extends React.Component{
                 return <div className="col-6 mb-2" key={index}>
                     <div className={ this.props.adminPrivilege ? "single-post-option p-1 d-flex justify-content-center align-items-center" : "single-post-option-user p-1 d-flex justify-content-center align-items-center"} onClick ={() => {!this.props.adminPrivilege && this.props.handleUserVote(this.props.singlePostData.postId, index)}}>
                         <p>{x.optionValue.optionValue}</p>
-                        {/* <span className="d-flex align-items-center p-1">{x.votes}</span> */}
+                        {this.props.adminPrivilege &&
+                            <span className="d-flex align-items-center p-1">{x.votes}</span>
+                        }
                     </div>
                 </div>
             })
