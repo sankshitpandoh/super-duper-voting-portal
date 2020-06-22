@@ -1,0 +1,21 @@
+.error-page-container img{
+    width: 700px;
+}
+.error-page-container h1{
+    font-family: 'Montserrat-Bold';
+    color: #1F130F;
+}
+.error-page-container p{
+    font-family: 'Montserrat-Regular';
+}
+.error-page-container div{
+    background-color: #A0A1A6;
+    color: #000;
+    border: 1px solid #A0A1A6;
+    transition: 0.5s all;
+    border-radius: 5px;
+}
+.error-page-container div:hover{
+    background-color: #1F130F;
+    color: #fff;
+}
